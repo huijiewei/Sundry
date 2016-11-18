@@ -6,6 +6,25 @@
  * Time: 16:50
  */
 
+/*
+  $config = [
+    'deploy' => [ // 项目名称
+        'token' => 'Token', // Webhook Token
+        'token_name' => 'secret', // Webhook Token 参数名
+        'usr' => 'git', // 用户名
+        'pwd' => 'pwd', // 密码
+        'url' => 'url', // Git 地址
+        'https' => false, // 是否开启 https
+        'ref_prefix' => 'refs/heads/', // 分支前缀
+        'master' => [ // 分支名称
+            'env' => 'prod', // 部署环境
+            'bin' => '', // 运行脚本
+            'dir' => '/home/websites/git', // 部署目录
+        ]
+    ],
+];
+*/
+
 $config = require('deploy.conf.php');
 
 function logmsg($log, $msg = '')
@@ -52,14 +71,15 @@ function gitpull($rep, $ref, $log)
     } else {
         $url = str_replace("http://", "http://$auth", $url);
     }
-    
+
     $result = shell_exec("git pull -f $url $ref 2>&1");
 
     logmsg($log, $result);
-    
-    if(strpos($result, 'environments/') !== false) {
-        $er =  shell_exec('./init --env='.$env.' --overwrite=All');        
-	    logmsg($log,'Init environment:'. $er);
+
+    // Yii 环境配置脚本
+    if (strpos($result, 'environments/') !== false) {
+        $er = shell_exec('./init --env=' . $env . ' --overwrite=All');
+        logmsg($log, 'Init environment:' . $er);
     }
 
     $result = shell_exec($bin);
