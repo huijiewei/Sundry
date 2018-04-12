@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name         Github File Icon
-// @namespace    http://blog.huijiewei.com/
+// @namespace    https://blog.huijiewei.com/
 // @version      0.2
 // @description  Change Github file icon much better.
-// @author       huijiewei@outlook.com
+// @author       Huijie Wei
 // @match        *://*.github.com/*
 // @resource deviconsCss https://cdn.bootcss.com/devicons/1.8.0/css/devicons.min.css
 // @grant        GM_addStyle
