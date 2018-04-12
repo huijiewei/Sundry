@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by CotEditor.
- * User: huijiewei
+ * User: Huijie Wei
  * Date: 5/29/15
  * Time: 16:50
  */
